@@ -1,0 +1,22 @@
+name: sync to gitee
+
+on:
+  push:
+    branches: [ master ]
+  
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: sync to gitee
+    runs-on: ubuntu-latest
+    steps:
+    - name: Organization mirror
+      uses: Yikun/hub-mirror-action@master
+      with:
+        src: github/lieber68
+        dst: gitee/lieber68
+        static_list: "RouterFirmware"
+        dst_key: ${{ secrets.GITEE_PRIVATE_KEY }}
+        dst_token: ${{ secrets.GITEE_TOKEN }}
+        force_update: true
